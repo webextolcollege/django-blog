@@ -40,7 +40,7 @@ def edit_category(request, pk):
         form = CategoryForm(request.POST, instance=category)
         if form.is_valid():
             form.save()
-            return redirect('categories') # Redirect to the categories page after a successful update
+            return redirect('categories') #Redirect to the categories page after a successful update
     else:
         form = CategoryForm(instance = category)
     context= {
@@ -49,4 +49,8 @@ def edit_category(request, pk):
     
     }
     return render(request, 'dashboard/edit_category.html', context)
+def delete_category(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+    category.delete()
+    return redirect('categories')
 
