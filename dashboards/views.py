@@ -61,9 +61,18 @@ def posts(request):
     }
     return render(request, 'dashboard/posts.html', context)
 def add_post(request):
+    if request.method == 'POST':
+        form = BlogPostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('posts')
+        else:
+            print('form is invalid')
+            print(form.errors)
     form=BlogPostForm()
     context={
-        'form': form
-        
+        'form': form 
     }
     return render(request, 'dashboard/add_post.html', context)
