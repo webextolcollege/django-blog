@@ -16,11 +16,11 @@
       <form action="{% url 'add_post' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form | crispy }}
-      <button type="submit" class="btn btn-warning">Submit</button>
+      <button type="submit" class="btn btn-warning">Submit</button> # for submit button
       </form>
       <br>
     
     </div>
-  </div>
+  </div> 
 
 {% endblock %}
