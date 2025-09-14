@@ -20,7 +20,7 @@
       <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1">
-            <a class="blog-header-logo text-dark" href="/">Django Blog</a>
+            <a class="blog-header-logo text-Blue font-size-h2" href="/">Educational Blog</a>
           </div>
           <div class="col-4">
             <form action=" {% url 'search'%}" method="GET">
@@ -46,7 +46,7 @@
       <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
           {% for cat in categories %}
-          <a class="p-2 text-muted" href="{% url 'posts_by_category' cat.id %}">{{cat.category_name}}</a>
+          <a class= text-font-weight-bold class="p-2 text-muted" href="{% url 'posts_by_category' cat.id %}">{{cat.category_name}}</a>
           {% endfor %}
         </nav>
       </div>
@@ -59,7 +59,7 @@
 <!-- Footer part -->
 
 <footer class="blog-footer">
-    <p>Django blog built with � by <a href="#">webextol</a></p>
+    <p class="text-center"><b>This Educational News Blog</b> built by <b>WebBroTech</b> a Brand of <b>WebBro Technologies Pvt Ltd </b><a href="https://www.youtube.com/@WebBroTech">www.WebBroTech.com</a></p>
   </footer>
   </body>
   </html>

@@ -22,5 +22,9 @@ urlpatterns = [
     path('users/add/', views.add_user, name='add_user'),  
     path('users/edit_users/<int:pk>/', views.edit_user, name='edit_user'),
     path('users/delete/<int:pk>/', views.delete_user, name='delete_user'),
-    
+
+    # posts path
+
+    path('posts/<slug:post_slug>/', views.post_detail, name='post_detail'), 
+
     ]

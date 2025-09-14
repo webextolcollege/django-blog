@@ -9,6 +9,8 @@
 
     <!-- Right side content --> 
     <div class="col-md-9">
+
+      {% if perms.auth.view_user %}
       <h3>All Users</h3>
       <a href="{% url 'add_user' %}" class="btn btn-dark text-light float-right mb-2"> Add New </a>
       <table class="table table-hover">
@@ -36,6 +38,7 @@
             <td>{% if user.is_superuser %} <i class="fa fa-check text-success"> {% else %} <i class="fa fa-times text-danger"></i> {% endif %}</td>
             
             <td>
+              
               <a href="{% url 'edit_user' user.id%}"><i class="fa fa-edit text-success"></i></a>
               &nbsp;
               <a href="{% url 'delete_user' user.id%}"><i class="fa fa-trash text-danger"></i></a>
@@ -46,6 +49,9 @@
           
         </tbody>
       </table>
+      {% else %}
+      <h5 class="text-center text-danger">You do not have permission to view this page</h5>
+      {% endif %}
     </div>
   </div>
   

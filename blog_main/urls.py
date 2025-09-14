@@ -27,6 +27,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('category/', include('blogs.urls')),
     path('blogs/<slug:slug>/', BlogView.blogs, name='blogs'),
+    
     # search endpoint
     path('blogs/search/', BlogView.search, name='search'),
     path('register/', views.register, name='register'),
@@ -35,5 +36,10 @@ urlpatterns = [
 
     # Dashboards
     path('dashboard/', include('dashboards.urls')),
+
+
+    
+    # ckeditor_5
+    path("ckeditor5/", include('django_ckeditor_5.urls')),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

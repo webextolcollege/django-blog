@@ -1,10 +1,12 @@
 from django.shortcuts import get_object_or_404, render
-from blogs.models import Blog, Category
+from blogs.models import Blog, Category, Comment
 from django.contrib.auth.decorators import login_required
 from .forms import AddUserForm, BlogPostForm, CategoryForm
 from django.shortcuts import redirect
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
+from .models import Post
+from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
 
@@ -76,7 +78,7 @@ def add_post(request):
             print(form.errors)
     form=BlogPostForm()
     context={
-        'form': form 
+        'form': form, 
     }
     return render(request, 'dashboard/add_post.html', context)
 
@@ -135,3 +137,31 @@ def delete_user(request, pk):
     user = get_object_or_404(User, pk=pk)
     user.delete()
     return redirect('users')
+
+
+
+
+
+# Post details
+def post_detail(request, post_slug):
+    single_post = get_object_or_404(Blog, slug=post_slug, status='Published')
+    if request.method == 'POST':
+        comment = Comment()
+        comment.user = request.user
+        comment.blog = single_post
+        comment.comment = request.POST.get('comment')
+        comment.save()
+        return HttpResponseRedirect(request.path_info)
+
+    # Comments
+    comments = Comment.objects.filter(blog=single_post)
+    comment_count = comments.count()
+
+    context = {
+        'single_post': single_post,
+        'comments': comments,
+        'comment_count': comment_count,
+
+    }
+
+    return render(request, 'dashboard/post_detail.html', context)

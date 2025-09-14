@@ -1,5 +1,3 @@
-
-
 {% extends 'base.html' %}
 
 {% block content %}
@@ -13,18 +11,18 @@
                 <!-- Post header-->
                 <header class="mb-4">
                     <!-- Post title-->
-                    <h1 class="fw-bolder mb-1">{{single_blog.title}}</h1>
+                    <h1 class="fw-bolder mb-1">{{single_post.title}}</h1>
                     <!-- Post meta content-->
-                    <div class="text-muted fst-italic mb-2">Posted on {{single_blog.created_at}} by {{single_blog.auther}}</div>
+                    <div class="text-muted fst-italic mb-2">Posted on {{single_post.created_at}} by {{single_post.auther}}</div>
                     <!-- Post category-->
-                    <a class="badge bg-warning text-decoration-none text-light" href="#!">{{single_blog.category}}</a>
+                    <a class="badge bg-warning text-decoration-none text-light" href="#!">{{single_post.category}}</a>
                 </header>
                 <!-- Preview image figure-->
-                <figure class="mb-4"><img class="img-fluid rounded" src="{{single_blog.featured_image.url}}" alt="..." /></figure>
+                <figure class="mb-4"><img class="img-fluid rounded" src="{{single_post.featured_image.url}}" alt="..." /></figure>
                 <!-- Post content-->
                 <section class="mb-5">
-                    <p class="fs-5 mb-4">{{single_blog.short_description|safe}}</p>
-                    <p class="fs-5 mb-4">{{single_blog.blog_body|safe}}</p>
+                    <p class="fs-5 mb-4">{{single_post.short_description|safe}}</p>
+                    <p class="fs-5 mb-4">{{single_post.blog_body|safe}}</p>
 
                     <!-- comments -->
                     <h4> Comments ({{ comment_count }}) </h4>
@@ -60,22 +58,19 @@
                 </section>
             </article>
         </div>
+
         <!-- Categories widget-->
+        <div class="col-md-4">
+            <!-- Categories widget -->
             <div class="card mb-4 p-3">
                 <h4 class="font-italic">Categories</h4>
-                <!-- <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6"> -->
-                            <ol class="list-unstyled">
-                                {% for cat in categories %}
-                                <li><a href="{% url 'posts_by_category' cat.id %}">{{cat.category_name}}</a></li>
-                                {% endfor %}
-                            </ol>
-                        <!-- </div>
-                    </div>
-                </div> -->
+                <ol class="list-unstyled">
+                    {% for cat in categories %}
+                    <li><a href="{% url 'posts_by_category' cat.id %}">{{cat.category_name}}</a></li>
+                    {% endfor %}
+                </ol>
             </div>
-            <!-- Side widget-->
+            <!-- Side widget -->
             {% if social_links %}
             <div class="card mb-4 p-3">
                 <h4 class="font-italic">Follow Us</h4>
@@ -86,7 +81,7 @@
                 </ol>
             </div>
             {% endif %}
-        </div>
+        </div> 
     </div>
 </div>
 

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django_ckeditor_5.fields import CKEditor5Field
 
 class Category(models.Model):
     category_name = models.CharField(max_length=50, unique=True)
@@ -23,8 +24,8 @@ class Blog(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     auther = models.ForeignKey(User, on_delete=models.CASCADE , null=True)
     featured_image = models.ImageField(upload_to='uploads/%y/%m/%d')
-    short_description = models.TextField(max_length=500)
-    blog_body = models.TextField(max_length=2000)
+    short_description = CKEditor5Field('short description', config_name='extends')
+    blog_body = CKEditor5Field('blog body', config_name='extends')
     status = models.CharField(max_length=20, choices = STATUS_CHOICES, default = "Draft")
     is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)

@@ -12,6 +12,7 @@
 
     <!-- Right side content --> 
     <div class="col-md-9">
+      {% if perms.blogs.add_post %}
       <h3>Add New Post</h3>
       <form action="{% url 'add_post' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -19,6 +20,9 @@
       <button type="submit" class="btn btn-warning">Submit</button> # for submit button
       </form>
       <br>
+      {% else %}
+      <h5 class="text-center text-danger"> You do not have permission to add post</h5>
+      {% endif %}
     
     </div>
   </div> 
