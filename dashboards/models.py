@@ -1,6 +1,6 @@
 from django.db import models
 from django.shortcuts import render, get_object_or_404
-from django_ckeditor_5.fields import CKEditor5Field
+from tinymce.models import HTMLField
 from django.contrib.auth.models import User
 
 
@@ -12,7 +12,7 @@ STATUS_CHOICES = (
 class Post(models.Model):
     title = models.CharField(max_length=300)
     slug = models.SlugField(max_length=150, blank=True, unique=True)
-    blog_body = CKEditor5Field('blog body', config_name='extends') 
+    blog_body = HTMLField()
     auther = models.ForeignKey(User, on_delete=models.CASCADE , null=True)
     status = models.CharField(max_length=20, choices = STATUS_CHOICES, default = "Draft")
     created_at = models.DateTimeField(auto_now_add=True)
